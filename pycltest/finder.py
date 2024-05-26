@@ -3,6 +3,14 @@ import os
 
 from pycltest.runner import Runner, Test
 
+def find_files (path: str):
+    if os.path.isdir(path):
+        res = []
+        for x in os.listdir(path): res += find_files(os.path.join(path, x))
+        return res
+    elif os.path.isfile(path) and path.endswith(".cpp"):
+        return [ path ]
+    return []
 def find_tests (path, runner: Runner):
     if os.path.isdir(path):
         for x in os.listdir(path): find_tests(os.path.join(path, x), runner)

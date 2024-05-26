@@ -27,7 +27,9 @@ def main ():
 
     command = ["g++", "-o", "build/out", "build/runner.cpp", "-I./"]
     if args.src != "":
-        command += [os.path.join(args.src, "**.cpp")]
+        sources = find_files(args.src)
+        print(sources)
+        command += sources
     if "&" in command or "|" in command or ">" in command:
         print("Command contains unexpected characters")
         exit()
